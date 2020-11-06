@@ -1,0 +1,171 @@
+JS Controls, Rapid Application Developing using resusable custom HTML elements and javascript with callbacks to SQL to populate and save items
+
+Current Controls include:
+Basic Button "basic-button"
+Drop Down Combo Box "drop-down"
+Masked Textbox "masked-textbox"
+Side Bar Menu "side-bar"
+Table View "table-view"
+Text Box "text-box"
+Title Bar "title-bar"
+
+
+
+All custom elements bring in their own CSS/HTML/JS per control which is inserted in to the DOM.  
+The CSS/HTML/JS is a template.  Each instance has a random ID generated and this ID is applied to the CSS/HTML/JS template.
+Custom CSS starts with "jsc_".
+
+Usage:
+---------------------------------------------------
+side-bar
+
+JS -- Here we make a array of items we want in the side menu.  Display name first, css classes to apply, like Font Awesome, then the function you want executed when clicked.
+
+			mySliderMenu = [
+				['Home','fa fa-home','showHome()'],
+				['Customers','fa fa-users','showCustomers()'],
+				['Table','fa fa-users','showTable()'],
+				['Settings','fa fa-cog','showSettings()'],
+				];
+HTML -- id:  Set and id for the menu to assist in opening and closing.  
+        pagediv_id: this is the main page div.  This is to help animating the main div.  It you leave this out the menu will pop over if you include it your main page will slide over
+        items: this the array of items used to build the menu  
+
+    <side-bar id='navbar' pagediv_id='main' items='mySliderMenu' ></side-bar>
+
+
+---------------------------------------------------
+basic-button
+JS
+    none
+HTML -- text:  What you want on the button
+        myonclick:  what JS function you want to execute if this is clicked
+	<basic-button text='test' myonclick='SetZIP()' ></basic-button>
+
+
+---------------------------------------------------
+drop-down
+JS -- Here we set up an array of the items on the list.  
+    It can be a single item or array for like the slidermenu with more information.  Second item is the databaseid, third css, fourth in function
+
+	myStates = [["AL"],["AK"],["AZ"],["AR"],["CA"],["CO"],["CT"],["DE"],["FL"],["GA"],["HI"],["ID"],["IL"],["IN"],["IA"],["KS"],["KY"],["LA"],["ME"],["MD"],["MA"],["MI"],["MN"],["MS"],["MO"],["MT"],["NE"],["NV"],["NH"],["NJ"],["NM"],["NY"],["NC"],["ND"],["OH"],["OK"],["OR"],["PA"],["RI"],["SC"],["SD"],["TN"],["TX"],["UT"],["VT"],["VA"],["WA"],["WV"],["WI"],["WY"],["AS"],["DC"],["FM"],["GU"],["MH"],["MP"],["PW"],["PR"],["VI"],["AE"],["AA"],["AE"],["AE"],["AE"],["AP"]];
+    myDropDown = [
+        ['Home',		0,	'fa fa-home',	'showHome()'],
+        ['Customers',	1,'fa fa-users',	'showCustomers()'],
+        ['Settings',	2,'fa fa-cog',	'showSettings()'],
+        ];
+    
+    Read the value selected
+    document.getElementbyID('statedropdown').getValue(); 
+
+    Set the value
+    document.getElementbyID('statedropdown').setValue('FL');
+
+    Manually show the drop
+    document.getElementbyID('statedropdown').showDrop();
+
+HTML -- id: standard id of the element
+        items:  list of items
+        selectedval:  selected item
+        placeholder:  text to display when nothing is selected
+        dbCol:  for databause updates and selects this provide the database column name
+	<drop-down id='statedropdown' items='myStates' selectedval='' placeholder='State' dbCol='state'></drop-down>
+
+
+---------------------------------------------------
+masked-textbox
+JS --   id:  stadnard id of element
+        format:  format string, 0 for number, L for alphabet letter, A for any
+        label:  label the box so the user knows what goes in the box
+        dbCol:  for databause updates and selects this provide the database column name /*** Needs Implementing
+
+    Read the value selected
+    document.getElementbyID('zip').getValue(); 
+
+    Set the value
+    document.getElementbyID('zip').setValue('FL');
+        
+
+HTML
+    <masked-textbox id='zip' format='00000-0000' label='Zip Code'></masked-textbox>
+
+---------------------------------------------------
+table-view
+JS --
+
+    Load the table with a json array of rows and columns like output from a select statement
+    document.getElementbyID('customertable').processJSON(json)
+
+    Sort by column number , and true or false if you want to draw table after
+    document.getElementbyID('customertable').sortByColumnNumber(column,draw)   
+
+    Sort by column name , and true or false if you want to draw table after
+    document.getElementbyID('customertable').sortByColumnName(column,draw)   
+
+    Draw the table by first removing it and drawing it with the correct sorting and hidden columns
+    document.getElementbyID('customertable').drawTable();
+
+    Disable or enable a column, column number, status is true or false, draw is true or false to draw after
+    document.getElementbyID('customertable').toggleColumn(column,status,draw);
+
+
+
+HTML --     id:  standard id
+            pagebreak:  how many rows you want per page
+            uniquecolumn:  database column name for db updates
+            sortcolumn:  column number to sort by
+            rowdoubleclick:  if a row is double clicked call this function passing the uniquecolumn id
+            celldoubleclick:  if a cell is double clicked it can display a edit box and callback to save the field ***** To be implemented
+            datatype:  type of data, numeric, money, date, time etc **** to be implemented
+
+        <table-view id='customertable' pagebreak='10' uniquecolumn='ID' sortcolumn='0' rowdoubleclick='loadCustomer'></table-view>
+
+
+---------------------------------------------------
+text-box
+JS --
+    set value of textbox and if the uuid is true this sets the id to search for when populating
+    document.getElementbyID('firstname').getValue();
+
+    get value of textbox
+    document.getElementbyID('firstname').setValue('asdf');
+
+HTML -- id:  standard id
+        name:  standard input element name
+        dbCol:  column from SQL that matches this field
+        uuid:  true or fasle.  This is for setting the database ID if the form is to be loaded and then automatically populated
+        value:  value in the textbox, if uuid is set then this is where the uuid is set
+
+        placeholder:  placeholder text
+
+        <text-box id='formCustomerID' name='id' dbCol='id' class='jsc_hidden' uuid='true' value='' ></text-box>
+        <text-box name='firstname' placeholder='First Name' dbCol='firstname'></text-box>
+
+
+
+------------------------------------------------------
+sql-bridge
+JS --
+
+    loadForm(formID,table,callback)
+    Load a form:  formID:  id of the div containing the fields
+                    table:  table name id database  
+                    callback:  function to call with the json data
+        
+    Form_DisplayResult(formID,result)
+    Display results on form:  typically called after loadForm
+                    formID:  id of the form 
+                    result:  json results
+    
+    insertFromForm(formID,table,callback)
+    insert a new sql record from the data on a form
+                    formID:  div of the form    
+                    table:  table name
+                    callback:  callback when completed
+
+    simple(sql,callback,...values) 
+    processes INSERT, UPDATE, and SELECT statements
+                    sql:  statement.  Use ? for values
+                    callback: callback once completed
+                    ...values:  array of values or can be left off if no ? values are in SQL statement
+                    
