@@ -1,0 +1,98 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="./css/jsc.css">
+		<script src="./controls/jsc.js"></script>
+		<script src="./sql-bridge/sql-bridge.js"></script>
+		<script src="./controls/side-bar.js"></script>
+		<script src="./controls/title-bar.js"></script>
+		<script src="./controls/text-box.js"></script>
+		<script src="./controls/basic-button.js"></script>
+		<script src="./controls/masked-textbox.js"></script>
+		<script src="./controls/table-view.js"></script>
+		<script src="./controls/drop-down.js"></script>
+
+		<script src="./javascript/home.js"></script>
+		<script src="./javascript/table.js"></script>
+		<script src="./javascript/customers.js"></script>
+		<script src="./javascript/newcustomer.js"></script>
+
+		<link rel="stylesheet" href="./fontawesome/all.css">
+		
+		<script>
+
+
+			mySliderMenu = [
+				['Home','fa fa-home','showHome()'],
+				['Customers','fa fa-users','showCustomers()'],
+				['Table','fa fa-users','showTable()'],
+				['Settings','fa fa-cog','showSettings()'],
+				];
+			myDropDown = [
+				['Home',		0,	'fa fa-home',	'showHome()'],
+				['Customers',	1,'fa fa-users',	'showCustomers()'],
+				['Settings',	2,'fa fa-cog',	'showSettings()'],
+				];
+
+
+				
+			myStates = [["AL"],["AK"],["AZ"],["AR"],["CA"],["CO"],["CT"],["DE"],["FL"],["GA"],["HI"],["ID"],["IL"],["IN"],["IA"],["KS"],["KY"],["LA"],["ME"],["MD"],["MA"],["MI"],["MN"],["MS"],["MO"],["MT"],["NE"],["NV"],["NH"],["NJ"],["NM"],["NY"],["NC"],["ND"],["OH"],["OK"],["OR"],["PA"],["RI"],["SC"],["SD"],["TN"],["TX"],["UT"],["VT"],["VA"],["WA"],["WV"],["WI"],["WY"],["AS"],["DC"],["FM"],["GU"],["MH"],["MP"],["PW"],["PR"],["VI"],["AE"],["AA"],["AE"],["AE"],["AE"],["AP"]];
+
+			function showSettings()
+			{
+				console.log('showSettings');
+			}
+			function SetZIP()
+			{
+				document.getElementById('zip').text='12345-1111';
+			}
+
+
+			var SQLBridge  = new class_SQLBridge('/sql-bridge/','12345');
+
+
+			
+		</script>
+
+		
+      </head>
+
+    <body>
+		<side-bar id='navbar' pagediv_id='main' items='mySliderMenu' ></side-bar>
+		<title-bar id='title-bar'></title-bar>
+        <div id="main" class="jsc_viewport">
+			<basic-button text='test' myonclick='SetZIP()' ></basic-button>
+			<masked-textbox id='phone' format='(000)000-0000'></masked-textbox>
+			<masked-textbox id='zip' format='00000-0000' label='Zip Code'></masked-textbox>
+			<drop-down id='dropdown' items='myDropDown' selectedval='Settings'></drop-down>
+            <h2>Collapsed Sidebar</h2>
+            <p>Content...</p>
+		</div>
+		<div id="view_customers" class="jsc_viewport" >
+			<basic-button text='New Customer' myonclick='showNewCustomers()' ></basic-button>
+			<basic-button text='Load Customer' myonclick='loadCustomer()' ></basic-button>
+			<table-view id='customertable' pagebreak='10' uniquecolumn='ID' sortcolumn='0' rowdoubleclick='loadCustomer'></table-view>
+		</div>
+		<div id="view_newcustomer" class="jsc_viewport" >
+			<text-box id='formCustomerID' name='id' dbCol='id' class='jsc_hidden' uuid='true' value='' ></text-box>
+			<text-box id='asdfasdg' name='Display Name' placeholder='Display Name' dbCol='name'></text-box>
+			<text-box name='firstname' placeholder='First Name' dbCol='firstname'></text-box>
+			<text-box name='lastname' placeholder='Last Name' dbCol='lastname'></text-box>
+			<text-box name='address' placeholder='Address' dbCol='address'></text-box>
+			<text-box name='city' placeholder='City' dbCol='city'></text-box>
+			<div class="div_table">
+				<div class="div_table_cell">
+					<text-box name='zip' placeholder='Zip' dbCol='zip'></text-box>
+				</div>
+				<div class="div_table_cell">
+					<drop-down id='statedropdown' items='myStates' selectedval='' placeholder='State' dbCol='state'></drop-down>
+				</div>
+			</div>
+			<basic-button text='Save' myonclick='SaveNewCustomer()' ></basic-button>
+		</div>
+		<div id="view_table" class="jsc_viewport" >
+			<basic-button text='Get Data' myonclick='GetTable()' ></basic-button>
+			
+		</div>
+
+	</body>
+</html>

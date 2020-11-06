@@ -1,0 +1,32 @@
+:root {
+    --h1-text-size: 4em;
+    --h2-text-size: 3em;
+    --h3-text-size: 2em;
+    --h4-text-size: 1em;
+    --control-bg-color: #4CAF50;
+    --input-bg-color:white;
+    --input-border-color: #000000;
+    --control-text-color: #ffffff;
+    --control-hover-color: #ddd;
+    --title-bar-height: 50px;
+    --viewport-start: 60px;
+    --control-margin: 5px;
+
+  }
+  .jsc_hidden {
+    visibility: hidden;
+  }
+  
+  .jsc_viewport {
+      transition: margin-left .5s; /* If you want a transition effect */
+      display: none;
+      margin-top: var(--viewport-start);
+  }
+  .jsc_div_table
+  {
+      display: table;
+  }
+  .jsc_div_table_cell
+  {
+      display: table-cell;
+  }
