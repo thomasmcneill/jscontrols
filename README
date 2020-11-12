@@ -42,6 +42,15 @@ HTML -- text:  What you want on the button
         myonclick:  what JS function you want to execute if this is clicked
 	<basic-button text='test' myonclick='SetZIP()' ></basic-button>
 
+---------------------------------------------------
+basic-switch
+JS
+    none
+HTML -- round:  If this isn't set then it is a square slider, otherwise round
+        myonclick:  what JS function you want to execute if this is clicked.  Don't include the ().  The function will be called and the check state, boolean, passed to the function.
+		
+	<basic-switch id='switchid' myonclick='ClickSwitch'  round=1></basic-switch>
+
 
 ---------------------------------------------------
 drop-down

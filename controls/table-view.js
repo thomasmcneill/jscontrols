@@ -175,6 +175,15 @@ class class_TableView extends HTMLElement {
 		this.makeMenu();
 		this.drawTable();
 	}
+	toggleColumn(column,status,draw)
+	{
+
+		this.columnVisible[column] = status;
+		this.makeMenu();
+		if(draw)
+			this.drawTable();
+	}
+
 	makeMenu()
 	{
 		var myNode = document.getElementById(this.jsc_id+'_menu');

@@ -11,6 +11,9 @@
     --title-bar-height: 50px;
     --viewport-start: 60px;
     --control-margin: 5px;
+    --checkbox-checked-color: #4CAF50;
+    --checkbox-unchecked-color: red;
+
 
   }
   .jsc_hidden {

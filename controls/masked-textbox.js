@@ -198,10 +198,8 @@ class class_MaskedTextBox extends HTMLElement {
 		} 
 		
 		if(this.myFormat.charAt(char_position) == 'A') {
-			if(this.Numeric.includes(key) || this.Alphabet.includes(key) ) {
 				document.getElementById(id).value=key;
 				hit=true;
-			}			
 		} 
 		
 		if(this.myFormat.charAt(char_position) == key) {
@@ -236,7 +234,7 @@ class class_MaskedTextBox extends HTMLElement {
 		
 	}
 	
-	get text() {
+	getValue() {
 		this.autoFillCharacter();
 		var result='';
 		for(var t=0;t<this.myFormat.length;t++)
@@ -248,7 +246,7 @@ class class_MaskedTextBox extends HTMLElement {
 
 		return result;
 	}
-	set text(value) 
+	setValue(value) 
 	{
 		for(var t=0;t<value.length;t++)
 		{

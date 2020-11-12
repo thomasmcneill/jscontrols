@@ -10,6 +10,7 @@
 		<script src="./controls/masked-textbox.js"></script>
 		<script src="./controls/table-view.js"></script>
 		<script src="./controls/drop-down.js"></script>
+		<script src="./controls/basic-switch.js"></script>
 
 		<script src="./javascript/home.js"></script>
 		<script src="./javascript/table.js"></script>
@@ -45,11 +46,18 @@
 			{
 				document.getElementById('zip').text='12345-1111';
 			}
-
+			function ClickSwitch(val)
+			{
+				alert("Switch Clicked " + val);
+			}
 
 			var SQLBridge  = new class_SQLBridge('/sql-bridge/','12345');
 
-
+			/*  Show the main page first */
+			window.addEventListener("load", function(){
+				jsc_show_divbyID("main");
+	
+			});
 			
 		</script>
 
@@ -64,12 +72,14 @@
 			<masked-textbox id='phone' format='(000)000-0000'></masked-textbox>
 			<masked-textbox id='zip' format='00000-0000' label='Zip Code'></masked-textbox>
 			<drop-down id='dropdown' items='myDropDown' selectedval='Settings'></drop-down>
+			<basic-switch id='switch' round=1 myonclick="ClickSwitch"></basic-switch>
             <h2>Collapsed Sidebar</h2>
             <p>Content...</p>
 		</div>
 		<div id="view_customers" class="jsc_viewport" >
 			<basic-button text='New Customer' myonclick='showNewCustomers()' ></basic-button>
 			<basic-button text='Load Customer' myonclick='loadCustomer()' ></basic-button>
+
 			<table-view id='customertable' pagebreak='10' uniquecolumn='ID' sortcolumn='0' rowdoubleclick='loadCustomer'></table-view>
 		</div>
 		<div id="view_newcustomer" class="jsc_viewport" >

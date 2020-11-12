@@ -13,7 +13,8 @@ class class_BasicButton extends HTMLElement {
 						text-align: center;
 						text-decoration: none;
 						display: inline-block;
-						margin: 4px 2px;
+						margin: var(--control-margin);
+
 						cursor: pointer;
 					}
 				</style>
