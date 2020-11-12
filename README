@@ -1,5 +1,10 @@
 JS Controls, Rapid Application Developing using resusable custom HTML elements and javascript with callbacks to SQL to populate and save items
 
+Main Goal:  To provide similar functionality that React and Angular without needing to compile the project or use nodejs.
+ 
+CSS and HTML are embedded in the javascript code for each custom element.  The CSS/HTML is a template and all css classes and id start with jsc_id when it randomly generated with each instance of the control.
+Then the tags are replaced with the genrated tag and the html and css added to the DOM.  
+
 Current Controls include:
 Basic Button "basic-button"
 Drop Down Combo Box "drop-down"
@@ -8,7 +13,7 @@ Side Bar Menu "side-bar"
 Table View "table-view"
 Text Box "text-box"
 Title Bar "title-bar"
-
+Basic Switch "basic-switch"
 
 
 All custom elements bring in their own CSS/HTML/JS per control which is inserted in to the DOM.  
