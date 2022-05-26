@@ -8,6 +8,7 @@ class class_SQLBridge
 
     loadForm(formID,table,callback)
     {
+        console.log("loadForm()");
         var SQL = `SELECT * FROM ${table} WHERE `;
         var value = '';
         var elements = jsc_getAllDescendents(formID);

@@ -13,7 +13,8 @@
     --control-margin: 5px;
     --checkbox-checked-color: #4CAF50;
     --checkbox-unchecked-color: red;
-
+    --side-bar-closed-width: 2em;
+    --side-bar-open-width:  250px;
 
   }
   .jsc_hidden {

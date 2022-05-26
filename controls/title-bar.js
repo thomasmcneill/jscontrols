@@ -8,7 +8,7 @@ class class_TitleBar extends HTMLElement {
 					width: 100%;
 					position: absolute;
 					top: 0;
-					left: 250px;
+					left: var(--side-bar-closed-width);
 					margin: 0px;
 
 					font-size: var(--h4-text-size);

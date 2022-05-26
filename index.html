@@ -17,7 +17,7 @@
 		<script src="./javascript/customers.js"></script>
 		<script src="./javascript/newcustomer.js"></script>
 
-		<link rel="stylesheet" href="./fontawesome/all.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 		
 		<script>
 
@@ -29,9 +29,9 @@
 				['Settings','fa fa-cog','showSettings()'],
 				];
 			myDropDown = [
-				['Home',		0,	'fa fa-home',	'showHome()'],
-				['Customers',	1,'fa fa-users',	'showCustomers()'],
-				['Settings',	2,'fa fa-cog',	'showSettings()'],
+				['DropDown 1',		0,	'fa fa-home',	'showHome()'],
+				['DropDown 2',	1,'fa fa-users',	'showCustomers()'],
+				['DropDown 3',	2,'fa fa-cog',	'showSettings()'],
 				];
 
 
@@ -65,23 +65,33 @@
       </head>
 
     <body>
-		<side-bar id='navbar' pagediv_id='main' items='mySliderMenu' ></side-bar>
+		<side-bar id='navbar' pagediv_id='main' items='mySliderMenu' mytext='<i class="fas fa-bars"></i>' ></side-bar>
 		<title-bar id='title-bar'></title-bar>
+
+
+
         <div id="main" class="jsc_viewport">
 			<basic-button text='test' myonclick='SetZIP()' ></basic-button>
 			<masked-textbox id='phone' format='(000)000-0000'></masked-textbox>
 			<masked-textbox id='zip' format='00000-0000' label='Zip Code'></masked-textbox>
-			<drop-down id='dropdown' items='myDropDown' selectedval='Settings'></drop-down>
+			<drop-down id='dropdown' items='myDropDown' selectedval='DropDown 1'></drop-down>
 			<basic-switch id='switch' round=1 myonclick="ClickSwitch"></basic-switch>
             <h2>Collapsed Sidebar</h2>
             <p>Content...</p>
 		</div>
+
+
+
 		<div id="view_customers" class="jsc_viewport" >
 			<basic-button text='New Customer' myonclick='showNewCustomers()' ></basic-button>
 			<basic-button text='Load Customer' myonclick='loadCustomer()' ></basic-button>
 
 			<table-view id='customertable' pagebreak='10' uniquecolumn='ID' sortcolumn='0' rowdoubleclick='loadCustomer'></table-view>
 		</div>
+
+		
+
+		
 		<div id="view_newcustomer" class="jsc_viewport" >
 			<text-box id='formCustomerID' name='id' dbCol='id' class='jsc_hidden' uuid='true' value='' ></text-box>
 			<text-box id='asdfasdg' name='Display Name' placeholder='Display Name' dbCol='name'></text-box>
@@ -89,6 +99,8 @@
 			<text-box name='lastname' placeholder='Last Name' dbCol='lastname'></text-box>
 			<text-box name='address' placeholder='Address' dbCol='address'></text-box>
 			<text-box name='city' placeholder='City' dbCol='city'></text-box>
+
+
 			<div class="div_table">
 				<div class="div_table_cell">
 					<text-box name='zip' placeholder='Zip' dbCol='zip'></text-box>
@@ -99,10 +111,13 @@
 			</div>
 			<basic-button text='Save' myonclick='SaveNewCustomer()' ></basic-button>
 		</div>
+
+
+
+
 		<div id="view_table" class="jsc_viewport" >
 			<basic-button text='Get Data' myonclick='GetTable()' ></basic-button>
 			
 		</div>
-
 	</body>
 </html>

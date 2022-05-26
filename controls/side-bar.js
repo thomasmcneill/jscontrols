@@ -5,7 +5,7 @@ class class_SideBar extends HTMLElement {
 			<style>
 
 				.jsc_id_button_div {
-					width: 250px;
+					width: var(--side-bar-closed-width);
 					position: absolute;
 					top: 0;
 					left: 0px;
@@ -14,7 +14,7 @@ class class_SideBar extends HTMLElement {
 					height: var(--title-bar-height);
 				}
 				.jsc_id_openbtn {
-					width: 250px;
+					width: var(--side-bar-closed-width);
 					height: 100%;
 					font-size: var(--h4-text-size);
 					cursor: pointer;
@@ -32,7 +32,7 @@ class class_SideBar extends HTMLElement {
 
 				.jsc_id_sidebar {
 					height: 0%; 
-					width: 250px;
+					width: var(--side-bar-closed-width);
 					position: absolute; 
 					z-index: 1; /* on top */
 					top: 0;
@@ -63,14 +63,14 @@ class class_SideBar extends HTMLElement {
 
 
 
-				/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+				/* smaller screens */
 				@media screen and (max-height: 450px) {
 				  .jsc_id_sidebar {padding-top: 15px;}
 				  .jsc_id_sidebar a {font-size: 18px;}
 				}
 			</style>
 			<div class="jsc_id_button_div">
-				<button  class="jsc_id_openbtn" onclick="jsc_parent.open()"><i class="fas fa-bars"></i></button>
+				<button id="jsc_id_openbtn" class="jsc_id_openbtn" onclick="jsc_parent.open()"><i class="fas fa-bars"></i></button>
 			</div>
 			<div id="jsc_id" class="jsc_id_sidebar">
 			</div>
@@ -85,8 +85,21 @@ class class_SideBar extends HTMLElement {
 		var parentElementString = "document.getElementById('" + this.getAttribute('id') + "')";
 		myHTML =  myHTML.replace(/jsc_parent/g,parentElementString);
 		this.innerHTML = myHTML;
-		
-		
+
+		/////////////////////////////////
+		// Place text in button
+		this.myText = '';
+		if(this.hasAttribute('mytext'))
+		{
+			this.myText = this.getAttribute('mytext');
+			document.getElementById(this.jsc_id+ "_openbtn").innerHTML = this.myText;
+
+		}
+
+
+
+		////////////////////////////////////
+		// Update HTML with Menu Items
 		myHTML = document.getElementById(this.jsc_id).innerHTML;
 		myHTML = `<a href="javascript:void(0)" class="jsc_id_closebtn" onclick="jsc_parent.close()">&times;</a>`;
 		myHTML =  myHTML.replace(/jsc_parent/g,parentElementString);
@@ -103,16 +116,18 @@ class class_SideBar extends HTMLElement {
 				var text = this.myMenuItems[outer][0];
 				var css = this.myMenuItems[outer][1];
 				var func = this.myMenuItems[outer][2];
-				console.log(text);
 				myHTML=myHTML +  `<a href="#" class="` + css + `" onclick="` + func + `; ` + closefunc + `;"> ` + text + `</a>`;  
 			}
 		}
 		
 		document.getElementById(this.jsc_id).innerHTML=myHTML;
+		
+
 
 	}
 	open() {
 		document.getElementById(this.jsc_id).style.height = "100%";
+		document.getElementById(this.jsc_id).style.width = "var(--side-bar-open-width)";
 		var divsToHide = document.getElementsByClassName("jsc_viewport"); 
 		for(var i = 0; i < divsToHide.length; i++){
 		   var el = divsToHide[i];
@@ -122,6 +137,7 @@ class class_SideBar extends HTMLElement {
 	}
 	close() {
 		document.getElementById(this.jsc_id).style.height = "0";
+		document.getElementById(this.jsc_id).style.width = "var(-side-bar-closed-width)";
 		var divsToHide = document.getElementsByClassName("jsc_viewport"); 
 		for(var i = 0; i < divsToHide.length; i++){
 		   var el = divsToHide[i];
