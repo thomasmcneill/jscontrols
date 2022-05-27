@@ -11,6 +11,7 @@
 		<script src="./controls/table-view.js"></script>
 		<script src="./controls/drop-down.js"></script>
 		<script src="./controls/basic-switch.js"></script>
+                <script src="./controls/gauge.js"></script>
 
 		<script src="./javascript/home.js"></script>
 		<script src="./javascript/table.js"></script>
@@ -21,7 +22,9 @@
 		
 		<script>
 
-
+                        Gauge1 = 10;
+                        setInterval(function() { Gauge1++;  if(Gauge1>254) Guage1=0; }, 1000);
+                        
 			mySliderMenu = [
 				['Home','fa fa-home','showHome()'],
 				['Customers','fa fa-users','showCustomers()'],
@@ -80,7 +83,7 @@
             <p>Content...</p>
 		</div>
 
-
+                <needle-gauge id='myCanvas' watch='Gauge1' value='0' name='Pressure' backcolor='grey' min='0' max='256' lowzoneend='64' lowzonecolor='orange' highzonestart='192' highzonecolor='red' normalcolor='green' width='200' height='200'></needle-gauge>
 
 		<div id="view_customers" class="jsc_viewport" >
 			<basic-button text='New Customer' myonclick='showNewCustomers()' ></basic-button>
